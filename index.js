@@ -1,11 +1,8 @@
 $(function() {
-  $('.zodiac-sign').on(async function() {
+  $('.zodiac-sign').on('click', async function() {
   
-  // Get the zodiac sign name from the clicked button
-  var sign = $(this).data('sign');
   
   // Make a request to your vedic astrology API to get the horoscope for the sign
-  // Replace the API_URL variable with the URL endpoint of your API
   const API_URL = 'https://sameer-kumar-aztro-v1.p.rapidapi.com/';
   const axios = require('axios');
   
@@ -28,7 +25,6 @@ $(function() {
     const response = await axios.request(options);
     console.log(response.data);
     
-    // Display the horoscope data in a new page or modal
     // Replace the implementation below with your desired method of displaying the data
     alert(response.data);
   } catch (error) {
