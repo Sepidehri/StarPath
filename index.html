@@ -6,32 +6,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="index.js"></script>
-    <title>StarPath</title>
+    <link rel="stylesheet" type="text/css" href="index.css">    
+    <title>StarPath</title>    
+    <script>        
+        function loadHeader() {            
+          fetch('header.html')
+            .then(response => response.text())
+            .then(content => {              
+              document.getElementById("header").innerHTML = content;
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });            
+
+            fetch('footer.html')
+            .then(response => response.text())
+            .then(content => {              
+              document.getElementById("footer").innerHTML = content;
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            });            
+        }              
+        
+        //show and hide dropdown list item on button click 
+        function show_hide() { 
+            var click = document.getElementById("list-items"); 
+            if(click.style.display ==="none") 
+                click.style.display ="block"; 
+            else 
+                click.style.display ="none";          
+        }   
+        
+        window.onload = function() {                        
+            loadHeader();
+            show_hide();
+        };
+      </script>
 </head>
-<nav>
-    Welcome to StarPath!
-    <ul>
-        <li>
-            <button>Home</button>
-        </li>
-        <li>
-            <button>Horoscopes</button>
-        </li>
-        <li>
-            <button>Charts</button>
-        </li>
-        <li>
-            <button>Compatibility</button>
-        </li>
-        <li>
-            <button>Consultations</button>
-        </li>
-        <li>
-            <button>Help</button>
-        </li>
-    </ul>
-</nav>
 <body>
+    <div id="header"></div>
+
     <h2>Free Horoscopes</h2>
     Choose your moon/ascendant sign and start reading your FREE daily/weekly/monthly horoscope:<br>
     <span>
@@ -88,5 +103,7 @@
         Talk to an expert for immediate support.<br>
         <button>CALL NOW</button>
     </p>
+
+    <div id="footer"></div>
 </body>
 </html>

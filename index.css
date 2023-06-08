@@ -1,61 +1,103 @@
 body {
-    background-image: url("galaxy.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    color: pink;
-    font-family: Arial, sans-serif;
-  }
-  
-  nav {
-    background-color: transparent;
-    color: pink;
-    padding: 10px;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-  }
-  
-  nav ul li {
-    margin-right: 10px;
-  }
-  
-  nav ul li button {
-    background-color: purple;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  h2 {
-    color: pink;
-  }
-  
-  span button {
-    background-color: purple;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  p h3 {
-    color: pink;
-  }
-  
-  p button {
-    background-color: purple;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
+  background-image: url("galaxy.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  color: pink;
+  font-family: Arial, sans-serif;
+}
+
+nav {
+  background-color: transparent;
+  color: pink;
+  padding: 10px;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+nav ul li {
+  margin-right: 10px;
+}
+
+nav ul li button {
+  background-color: purple;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+h1 {
+  color: rgb(239, 99, 12);
+}
+
+h2 {
+  color: pink;
+}
+
+span button {
+  background-color: purple;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+p h3 {
+  color: pink;
+}
+
+p button {
+  background-color: purple;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+div {
+  background-color: #f4f6d1;
+  height: auto;
+  width: auto;
+  padding: 10px;
+}
+a {
+  color: brown;
+  text-align: left;
+}
+/* set the position of dropdown */ 
+.dropdown { 
+  position: relative; 
+  display: inline-block; 
+} 
+/* set the size and position of button on web */ 
+.button { 
+  padding: 10px 20px; 
+  background-color: coral;
+  font-size: 15px; 
+  font-weight: bold;
+} 
+/* provide css to background of list items */ 
+#list-items { 
+  display: none; 
+  position: absolute; 
+  background-color: rgb(211, 214, 246); 
+  min-width: 185px; 
+} 
+/* provide css to list items */ 
+#list-items a { 
+  display: block; 
+  font-size: 18px; 
+  background-color: #dddddd; 
+  color: rgb(20, 4, 136); 
+  text-decoration: none; 
+  padding: 10px; 
+} 
