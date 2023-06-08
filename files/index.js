@@ -1,11 +1,12 @@
 $(function() {
-  $('.zodiac-sign').on('click', async function() {
   
+  $('.zodiac-sign').on('click', async function(){
+    alert(1)
   
   // Make a request to your vedic astrology API to get the horoscope for the sign
   const API_URL = 'https://sameer-kumar-aztro-v1.p.rapidapi.com/';
   const axios = require('axios');
-  
+  alert(2)
   const options = {
     method: 'POST',
     url: API_URL,
@@ -20,7 +21,7 @@ $(function() {
   };
   
   try {
-  
+    alert(3)
     // Make the API request using axios
     const response = await axios.request(options);
     console.log(response.data);
