@@ -123,9 +123,15 @@ a {
   background-size: cover;
   filter: saturate(70%);
   background-blend-mode: soft-light,multiply;
-       
+  transition: opacity 0.3s ease;
   
 }
+
+.hidden {
+  display: none;
+}
+
+
 
 .service-box h3 {
   font-size: 18px;
@@ -182,4 +188,15 @@ a {
   color: #ffd1dc;
   text-decoration: none;
   padding: 2px;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
