@@ -155,7 +155,7 @@ a {
 
 /* set the size and position of button on web */
 .button {
-  padding: 10px 20px;
+  padding: 0px 0px;
   background-color: white;
   font-size: 15px;
   font-weight: bold;
