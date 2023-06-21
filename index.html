@@ -43,6 +43,8 @@
             loadHeader();
             show_hide();
         };
+
+        
       </script>
 </head>
 <body>
@@ -131,7 +133,7 @@
         <div class="services">
             <div class="service-box">
               <h3>Charts and<br><br>  calculations</h3>
-              <button>ENTER NOW</button>
+              <button onclick="redirectToChartsCalculations()">ENTER NOW</button>
             </div>
             <div class="service-box">
               <h3>Matching and <br><br>compatibility</h3>
@@ -148,7 +150,7 @@
               <h3>StarPath <br><br>Speaks</h3>
               <button onclick="togglePhoneNumber()">CALL NOW</button>
               <div id="phone-number" class="hidden">
-                1234567890
+                <a href="tel:1234567890">1234567890</a>
               </div>
             </div>
           </div>
@@ -169,10 +171,12 @@
 
              #phone-number {
               background-color: transparent;
-              color: #ffd1dc;
               font-size: 16px;
               padding: 1px;
               text-align: center;}
+
+              #phone-number a {
+              color: #ffd1dc;}
 
               #book-now  {
               background-color: transparent;
@@ -193,6 +197,12 @@
                 var phoneNumberElement = document.getElementById("phone-number");
                 phoneNumberElement.classList.toggle("hidden");
             }
+
+            
+         function redirectToChartsCalculations() {
+          window.location.href = 'charts-calculations.html';
+}
+
         </script>
       
         <div id="footer"></div>
