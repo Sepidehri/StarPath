@@ -20,6 +20,10 @@ app.get('/footer', (req, res) => {
     res.sendFile(__dirname + '/footer.html');
 });
 
+app.get('/charts-calculations', (req, res) => {
+  res.sendFile(path.join(__dirname, 'charts-calculations.html'));
+});
+
 app.get('/astrology/:sign/today', async (req, res) => {
     const sign = req.params.sign;
     const day = 'today';

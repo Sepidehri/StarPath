@@ -43,3 +43,10 @@ function toggleBookNow() {
   bookNowElement.classList.toggle("hidden");
 }
 
+
+function redirectToChartsCalculations() {
+  window.location.href = 'charts-calculations.html';
+}
+
+
+
