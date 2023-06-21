@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="index.js"></script>
-    <link rel="stylesheet" type="text/css" href="index.css">    
+    <link rel="stylesheet" type="text/css" href="index.css">   
+     
     <title>StarPath</title>    
     <script>        
         function loadHeader() {            
           fetch('header')
             .then(response => response.text())
             .then(content => {              
-              document.getElementById("header").innerHTML = content;
+              document.getElementById("header1").innerHTML = content;
             })
             .catch(error => {
               console.error('Error:', error);
@@ -45,64 +46,109 @@
       </script>
 </head>
 <body>
-    <div id="header"></div>
-
-    <h2>Free Horoscopes</h2>
-    Choose your moon/ascendant sign and start reading your FREE daily/weekly/monthly horoscope:<br>
-    <span>
-        <button class="zodiac-sign" data-sign="Aries">Aries</button>
-    </span>
-    <span>
-        <button class="zodiac-sign" data-sign="Taurus">Taurus</button>
-    </span>
-    <span>
-        <button class="zodiac-sign" data-sign="Gemini">Gemini</button>
-    </span>
-    <span>
-        <button class="zodiac-sign" data-sign="Cancer">Cancer</button>
-    </span>
-    <span>
-        <button class="zodiac-sign" data-sign="Leo">Leo</button>
-    </span>
-    <span>
-        <button class="zodiac-sign" data-sign="Virgo">Virgo</button>
-    </span>
-    <span>
-        <button class="zodiac-sign" data-sign="Libra">Libra</button>
-    </span>
-    <span>
-        <button class="zodiac-sign" data-sign="Scorpio">Scorpio</button>
-    </span>
-    <span>
-        <button class="zodiac-sign" data-sign="Sagittarius">Sagittarius</button>
-    </span>
-    <span>
-        <button class="zodiac-sign" data-sign="Capricorn">Capricorn</button>
-    </span>
-    <span>
-        <button class="zodiac-sign" data-sign="Aquarius">Aquarius</button>
-    </span>
-    <span>
-        <button class="zodiac-sign" data-sign="Pisces">Pisces</button>
-    </span><br><br>
-    <p>
-        <h3>Charts and calculations</h3>
-        <button>ENTER NOW</button>
-    </p>
-    <p>
-        <h3>Matching and compatibility</h3>
-        <button>ENTER NOW</button>
-    </p>
-    <p>
-        <h3>Consult with an astrologer</h3>
-        <button>BOOK NOW</button>
-    </p>
-    <p>
-        <h3>StarPath Speaks</h3>
-        Talk to an expert for immediate support.<br>
-        <button>CALL NOW</button>
-    </p>
-
-    <div id="footer"></div>
+    <body>
+        <div id="header1"></div>
+      
+        <div class="horoscope-section">
+          <h2>Free Horoscopes</h2>
+          <p>Choose your moon/ascendant sign and start reading your FREE daily/weekly/monthly horoscope:</p>
+          <div class="zodiac-buttons">
+            <span>
+                <button class="zodiac-sign" data-sign="Aries">
+                    <span class="zodiac-symbol">&#9800;</span>
+                    Aries
+                </button>
+            </span>
+            <span>
+                <button class="zodiac-sign" data-sign="Taurus">
+                    <span class="zodiac-symbol">&#9801;</span>
+                    Taurus
+                </button>
+            </span>
+            <span>
+                <button class="zodiac-sign" data-sign="Gemini">
+                    <span class="zodiac-symbol">&#9802;</span>
+                    Gemini
+                </button>
+            </span>
+            <span>
+                <button class="zodiac-sign" data-sign="Cancer">
+                    <span class="zodiac-symbol">&#9803;</span>
+                    Cancer
+                </button>
+            </span>
+            <span>
+                <button class="zodiac-sign" data-sign="Leo">
+                    <span class="zodiac-symbol">&#9804;</span>
+                    Leo
+                </button>
+            </span>
+            <span>
+                <button class="zodiac-sign" data-sign="Virgo">
+                    <span class="zodiac-symbol">&#9805;</span>
+                    Virgo
+                </button>
+            </span>
+            <span>
+                <button class="zodiac-sign" data-sign="Libra">
+                    <span class="zodiac-symbol">&#9806;</span>
+                    Libra
+                </button>
+            </span>
+            <span>
+                <button class="zodiac-sign" data-sign="Scorpio">
+                    <span class="zodiac-symbol">&#9807;</span>
+                    Scorpio
+                </button>
+            </span>
+            <span>
+                <button class="zodiac-sign" data-sign="Sagittarius">
+                    <span class="zodiac-symbol">&#9808;</span>
+                    Sagittarius
+                </button>
+            </span>
+            <span>
+                <button class="zodiac-sign" data-sign="Capricorn">
+                    <span class="zodiac-symbol">&#9809;</span>
+                    Capricorn
+                </button>
+            </span>
+            <span>
+                <button class="zodiac-sign" data-sign="Aquarius">
+                    <span class="zodiac-symbol">&#9810;</span>
+                    Aquarius
+                </button>
+            </span>
+            <span>
+                <button class="zodiac-sign" data-sign="Pisces">
+                    <span class="zodiac-symbol">&#9811;</span>
+                    Pisces
+                </button>
+            </span>
+          </div>
+        </div>
+      
+        <div class="services">
+          <div class="service-box">
+            <h3>Chartsand<br><br>  calculations</h3>
+            <button>ENTER NOW</button>
+          </div>
+          <div class="service-box">
+            <h3>Matching and <br><br>compatibility</h3>
+            <button>ENTER NOW</button>
+          </div>
+          <div class="service-box">
+            <h3>Consult with  <br><br>an astrologer</h3>
+            <button>BOOK NOW</button>
+          </div>
+          <div class="service-box">
+            <h3>StarPath <br><br>Speaks</h3>
+            <button>CALL NOW</button>
+          </div>
+        </div>
+      
+        <div id="footer"></div>
+      </body>
+      
 </body>
 </html>

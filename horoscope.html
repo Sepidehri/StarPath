@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Horoscope</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Horoscope</h1>
+
+    <div id="color"></div>
+    <div id="compatibility"></div>
+    <div id="current_date"></div>
+    <div id="date_range"></div>
+    <div id="description"></div>
+    <div id="lucky_number"></div>
+    <div id="lucky_time"></div>
+    <div id="mood"></div>
+
+    <script>
+        // Get the horoscope data from the URL
+        const dataString = decodeURIComponent(new URL(window.location.href).searchParams.get('data'));
+        const data = JSON.parse(dataString);
+
+        // Display the data on the page
+        document.getElementById('color').innerText = 'Color: ' + data.color;
+        document.getElementById('compatibility').innerText = 'Compatibility: ' + data.compatibility;
+        document.getElementById('current_date').innerText = 'Current Date: ' + data.current_date;
+        document.getElementById('date_range').innerText = 'Date Range: ' + data.date_range;
+        document.getElementById('description').innerText = 'Description: ' + data.description;
+        document.getElementById('lucky_number').innerText = 'Lucky Number: ' + data.lucky_number;
+        document.getElementById('lucky_time').innerText = 'Lucky Time: ' + data.lucky_time;
+        document.getElementById('mood').innerText = 'Mood: ' + data.mood;
+    </script>
+</body>
+</html>
