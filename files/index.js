@@ -33,3 +33,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
 });
 
+function togglePhoneNumber() {
+  var phoneNumberElement = document.getElementById("phone-number");
+  phoneNumberElement.classList.toggle("hidden");
+}
+
+function toggleBookNow() {
+  var bookNowElement = document.getElementById("book-now");
+  bookNowElement.classList.toggle("hidden");
+}
+

@@ -46,7 +46,7 @@
       </script>
 </head>
 <body>
-    <body>
+    
         <div id="header1"></div>
       
         <div class="horoscope-section">
@@ -129,23 +129,30 @@
         </div>
       
         <div class="services">
-          <div class="service-box">
-            <h3>Chartsand<br><br>  calculations</h3>
-            <button>ENTER NOW</button>
+            <div class="service-box">
+              <h3>Chartsand<br><br>  calculations</h3>
+              <button>ENTER NOW</button>
+            </div>
+            <div class="service-box">
+              <h3>Matching and <br><br>compatibility</h3>
+              <button>ENTER NOW</button>
+            </div>
+            <div class="service-box">
+              <h3>Consult with  <br><br>an astrologer</h3>
+              <button onclick="toggleBookNow()">BOOK NOW</button>
+              <div id="book-now" class="hidden">
+                <a href="mailto:example@example.com">Consult@starpath.com</a>
+              </div>
+            </div>
+            <div class="service-box">
+              <h3>StarPath <br><br>Speaks</h3>
+              <button onclick="togglePhoneNumber()">CALL NOW</button>
+              <div id="phone-number" class="hidden">
+                1234567890
+              </div>
+            </div>
           </div>
-          <div class="service-box">
-            <h3>Matching and <br><br>compatibility</h3>
-            <button>ENTER NOW</button>
-          </div>
-          <div class="service-box">
-            <h3>Consult with  <br><br>an astrologer</h3>
-            <button>BOOK NOW</button>
-          </div>
-          <div class="service-box">
-            <h3>StarPath <br><br>Speaks</h3>
-            <button>CALL NOW</button>
-          </div>
-        </div>
+          
 
         <style>
             .zodiac-sign:hover {
@@ -159,14 +166,37 @@
              .service-box:hover {
              transform: scale(1.05);}
 
-             
+
+             #phone-number {
+              background-color: transparent;
+              color: #ffd1dc;
+              font-size: 16px;
+              padding: 1px;
+              text-align: center;}
+
+              #book-now  {
+              background-color: transparent;
+              font-size: 16px;
+              padding: 1px;
+              text-align: center;}
+
+              #book-now a {
+              color: #ffd1dc;}
+
+
+
 
     
         </style>
-        
+         <script>
+            function togglePhoneNumber() {
+                var phoneNumberElement = document.getElementById("phone-number");
+                phoneNumberElement.classList.toggle("hidden");
+            }
+        </script>
       
         <div id="footer"></div>
-      </body>
+      
       
 </body>
 </html>
