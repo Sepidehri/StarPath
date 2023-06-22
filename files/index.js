@@ -71,3 +71,7 @@ function redirectToContactUs(){
   window.location.href = '/contactus';
 }
 
+function redirectToAccount(){
+  window.location.href = '/account';
+}
+

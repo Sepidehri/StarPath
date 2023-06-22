@@ -32,6 +32,10 @@ app.get('/contactus', (req, res) => {
   res.sendFile(__dirname + '/contactus.html');
 });
 
+app.get('/account', (req, res) => {
+  res.sendFile(__dirname + '/account.html');
+});
+
 app.get('/horoscope/:sign', (req, res) => {
   const sign = req.params.sign;
   res.sendFile(__dirname + `/horoscope.html?sign=${sign}`);

@@ -5,6 +5,7 @@
     align-items: center;
     display: flex;
     flex-direction: column;
+    
 
 }
 
@@ -79,3 +80,5 @@ button {
 button:hover {
     background-color: #7434a4;
 }
+
+
