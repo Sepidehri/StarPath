@@ -7,6 +7,8 @@
     <title>Charts and Calculations</title>
     <link rel="stylesheet" type="text/css" href="charts-calculations.css">
     <script src="charts-calculations.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 <body>
     <div id="charts-calculations"></div>
@@ -37,7 +39,7 @@
 
         <!-- Additional fields for latitude and longitude if needed -->
 
-        <button type="submit">Calculate</button>
+        <button type="submit" onclick="redirectToChart()">Calculate</button>
     </form>
 
     <div id="birth-chart">
@@ -54,7 +56,7 @@
                 method: 'GET',
                 url: 'https://wft-geo-db.p.rapidapi.com/v1/geo/adminDivisions',
                 headers: {
-                    'X-RapidAPI-Key': 'YOUR_API_KEY',
+                    'X-RapidAPI-Key': '6c588273dbmsh5e380d6f76000dep1312dfjsnfd5b6c1e7f5b',
                     'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
                 }
             };

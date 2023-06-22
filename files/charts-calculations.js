@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 const citySelect = document.getElementById('birth-place');
 
 const options = {
@@ -54,3 +56,7 @@ document.getElementById('chart-form').addEventListener('submit', function(event)
       console.error(error);
     });
 });
+
+function redirectToChart(){
+    window.location.href = '/chart';
+  }
