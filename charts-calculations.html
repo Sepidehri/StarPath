@@ -10,7 +10,107 @@
 </head>
 <body>
     <div id="charts-calculations"></div>
-    <h1>Charts and Calculations Page</h1>
-    <p>This is the content for charts and calculations.</p>
+    <h1>Birth Chart Calculation</h1>
+    <form id="chart-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+
+        <label for="birth-date">Birth Date:</label>
+        <input type="date" id="birth-date" required>
+
+        <label for="birth-time">Birth Time:</label>
+        <input type="time" id="birth-time" required>
+
+        <label for="birth-place">Birth Place:</label>
+        <select id="birth-place" required>
+            <!-- City options will be dynamically populated -->
+        </select>
+
+        <label for="daylight-saving">Daylight Saving Time:</label>
+        <input type="checkbox" id="daylight-saving">
+
+        <!-- Additional fields for latitude and longitude if needed -->
+
+        <button type="submit">Calculate</button>
+    </form>
+
+    <div id="birth-chart">
+        <!-- Birth chart will be displayed here -->
+    </div>
+
+    <script>
+        // Fetch cities from API and populate the dropdown
+        fetchCities();
+
+        // Function to fetch cities from the API
+        function fetchCities() {
+            const options = {
+                method: 'GET',
+                url: 'https://wft-geo-db.p.rapidapi.com/v1/geo/adminDivisions',
+                headers: {
+                    'X-RapidAPI-Key': 'YOUR_API_KEY',
+                    'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
+                }
+            };
+
+            fetch(options.url, {
+                method: options.method,
+                headers: options.headers
+            })
+            .then(response => response.json())
+            .then(data => {
+                const cities = data.data;
+                const citySelect = document.getElementById('birth-place');
+
+                cities.forEach(city => {
+                    const option = document.createElement('option');
+                    option.value = city.cityName;
+                    option.textContent = city.cityName;
+                    citySelect.appendChild(option);
+                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        }
+
+        // Handle form submission
+        document.getElementById('chart-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Retrieve user input
+            const birthDate = document.getElementById('birth-date').value;
+            const birthTime = document.getElementById('birth-time').value;
+            const birthPlace = document.getElementById('birth-place').value;
+
+            // Make AJAX request to backend endpoint
+            fetch('/calculate-chart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    date: birthDate,
+                    time: birthTime,
+                    place: birthPlace
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the birth chart on the page
+                const birthChart = document.getElementById('birth-chart');
+                birthChart.innerHTML = JSON.stringify(data); // Replace with your own logic to render the chart
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        });
+    </script>
 </body>
 </html>
