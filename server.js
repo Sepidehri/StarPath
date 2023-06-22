@@ -20,8 +20,22 @@ app.get('/footer', (req, res) => {
     res.sendFile(__dirname + '/footer.html');
 });
 
+app.get('/register', (req, res) => {
+  res.sendFile(__dirname + '/register.html');
+});
+
+app.get('/horoscope/:sign', (req, res) => {
+  const sign = req.params.sign;
+  res.sendFile(__dirname + `/horoscope.html?sign=${sign}`);
+});
+
+
 app.get('/charts-calculations', (req, res) => {
-  res.sendFile(path.join(__dirname, 'charts-calculations.html'));
+  res.sendFile(__dirname + '/charts-calculations.html');
+});
+
+app.get('/matching-compatibility', (req, res) => {
+  res.sendFile(__dirname + '/matching-compatibility.html');
 });
 
 app.get('/astrology/:sign/today', async (req, res) => {

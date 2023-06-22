@@ -1,0 +1,45 @@
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #7434a4;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    color: #7434a4;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+input[type="tel"],
+input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ffd1dc;
+    border-radius: 5px;
+    color: #7434a4;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #7434a4;
+    color: #ffd1dc;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #7434a4;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="register.css">
+    <title>Registration</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Create an Account</h1>
+            <form id="registration-form">
+              <div class="form-group">
+                <label for="first-name">First Name:</label>
+                <input type="text" id="first-name" required>
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name:</label>
+                <input type="text" id="last-name" required>
+              </div>
+              <div class="form-group">
+                <label for="date-of-birth">Date of Birth:</label>
+                <input type="date" id="date-of-birth" required>
+              </div>
+              <div class="form-group">
+                <label for="time-of-birth">Time of Birth:</label>
+                <input type="time" id="time-of-birth" required>
+              </div>
+              <div class="form-group">
+                <label for="country">Country of Birth:</label>
+                <input type="text" id="country" required>
+              </div>
+              <div class="form-group">
+                <label for="city">City of Birth:</label>
+                <input type="text" id="city" required>
+              </div>
+              <div class="form-group">
+                <label for="phone-number">Phone Number:</label>
+                <input type="tel" id="phone-number">
+              </div>
+              <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" required>
+              </div>
+              <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+              </div>
+              <div class="form-group">
+                <label for="confirm-password">Confirm Password:</label>
+                <input type="password" id="confirm-password" required>
+              </div>
+              <button type="submit">Register</button>
+            </form>
+            <div id="registration-message"></div>
+          </div>
+          
+
+    <script src="register.js"></script>
+</body>
+</html>

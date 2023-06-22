@@ -27,9 +27,32 @@
             })
             .catch(error => {
               console.error('Error:', error);
-            });            
-        }              
-        
+            });    
+             
+        }         
+        function loadMatching() {  
+        fetch('matching-compatibility')
+            .then(response => response.text())
+            .then(content => {              
+              document.getElementById("matching-compatibility").innerHTML = content;
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            }); 
+        }
+
+        function loadcharts() {  
+        fetch('charts-calculations')
+            .then(response => response.text())
+            .then(content => {              
+              document.getElementById("charts-calculations").innerHTML = content;
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            }); 
+        }
+
+
         //show and hide dropdown list item on button click 
         function show_hide() { 
             var click = document.getElementById("list-items"); 
@@ -50,6 +73,9 @@
 <body>
     
         <div id="header1"></div>
+
+       <div id="matching-compatibility"></div>
+        <div id="charts-calculations"></div>
       
         <div class="horoscope-section">
           <h2>Free Horoscopes</h2>
@@ -137,7 +163,7 @@
             </div>
             <div class="service-box">
               <h3>Matching and <br><br>compatibility</h3>
-              <button>ENTER NOW</button>
+              <button onclick="redirectToMatchingCompatibility()">ENTER NOW</button>
             </div>
             <div class="service-box">
               <h3>Consult with  <br><br>an astrologer</h3>
@@ -199,9 +225,6 @@
             }
 
             
-         function redirectToChartsCalculations() {
-          window.location.href = 'charts-calculations.html';
-}
 
         </script>
       

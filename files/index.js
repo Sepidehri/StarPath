@@ -16,6 +16,9 @@ $(function() {
   });
 });
 
+
+
+
 document.addEventListener('DOMContentLoaded', (event) => {
   document.querySelectorAll('.zodiac-sign').forEach(button => {
     button.addEventListener('click', function() {
@@ -45,8 +48,11 @@ function toggleBookNow() {
 
 
 function redirectToChartsCalculations() {
-  window.location.href = 'charts-calculations.html';
+  window.location.href = '/charts-calculations';
 }
 
 
+function redirectToMatchingCompatibility() {
+  window.location.href = '/matching-compatibility';
+}
 
