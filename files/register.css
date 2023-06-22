@@ -1,7 +1,11 @@
 .container {
-    max-width: 500px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+
 }
 
 h1 {
@@ -9,8 +13,16 @@ h1 {
     color: #7434a4;
 }
 
-.form-group {
+.form-row {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
+    align-items: center;
+}
+
+.form-group {
+    margin-bottom: 1px; 
+    
 }
 
 label {
@@ -23,12 +35,31 @@ input[type="text"],
 input[type="date"],
 input[type="time"],
 input[type="tel"],
-input[type="email"] {
+input[type="email"],
+input[type="password"]
+ {
     width: 100%;
     padding: 10px;
     border: 1px solid #ffd1dc;
     border-radius: 5px;
     color: #7434a4;
+   
+}
+
+ input[type="text"]:hover, 
+ input[type="date"]:hover ,
+ input[type="time"]:hover,
+ input[type="tel"]:hover,
+ input[type="email"]:hover,
+ input[type="password"]:hover{
+    border-color:#7434a4; 
+    
+}
+
+input[type="date"],
+input[type="time"] {
+    width: 184px; 
+    
 }
 
 button {
@@ -36,9 +67,14 @@ button {
     background-color: #7434a4;
     color: #ffd1dc;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
 }
+
 
 button:hover {
     background-color: #7434a4;

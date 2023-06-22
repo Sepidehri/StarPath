@@ -56,3 +56,18 @@ function redirectToMatchingCompatibility() {
   window.location.href = '/matching-compatibility';
 }
 
+function redirectToCIndex() {
+  window.location.href = '/';
+}
+
+function redirectToSignIn() {
+  window.location.href = '/signin';
+}
+
+function redirectToRegister() {
+  window.location.href = '/register';
+}
+function redirectToContactUs(){
+  window.location.href = '/contactus';
+}
+

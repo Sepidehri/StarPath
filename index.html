@@ -52,6 +52,29 @@
             }); 
         }
 
+        function loadregister() {  
+        fetch('register')
+            .then(response => response.text())
+            .then(content => {              
+              document.getElementById("register").innerHTML = content;
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            }); 
+        }
+
+
+        function loadsignin() {  
+        fetch('signin')
+            .then(response => response.text())
+            .then(content => {              
+              document.getElementById("signin").innerHTML = content;
+            })
+            .catch(error => {
+              console.error('Error:', error);
+            }); 
+        }
+
 
         //show and hide dropdown list item on button click 
         function show_hide() { 
