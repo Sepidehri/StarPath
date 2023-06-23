@@ -6,20 +6,15 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
 
-// Dummy user data for testing purposes
-const users = [
-  {
-    id: 1,
-    username: 'example',
-    password: '$2b$10$grR2g4aOUEM87fTE2gOhSeojN6/5ETPLrqBCLWQFdKbc/fkIn/tm6', // Hashed password for 'password'
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-  },
-];
+
+
 
 app.use(express.static(path.join(__dirname, 'files')));
 app.use(bodyParser.json());
+app.use(cookieParser());
+
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
@@ -64,6 +59,10 @@ app.get('/charts-calculations', (req, res) => {
 
 app.get('/matching-compatibility', (req, res) => {
   res.sendFile(__dirname + '/matching-compatibility.html');
+});
+
+app.get('/horoscope', (req, res) => {
+  res.sendFile(__dirname + '/horoscope.html');
 });
 
 app.get('/astrology/:sign/today', async (req, res) => {
@@ -143,7 +142,8 @@ app.post('/login', async (req, res) => {
     expiresIn: '1h', // Set the expiration time for the token
   });
 
-  res.json({ token });
+  // Set the token in a cookie
+  res.cookie('token', token, { httpOnly: true }).json({ message: 'Login successful' });
 });
 
 function authenticateToken(req, res, next) {
@@ -166,21 +166,26 @@ function authenticateToken(req, res, next) {
 
 
 app.get('/account', authenticateToken, (req, res) => {
-  const username = req.user.username;
+  // Retrieve the token from the cookie
+  const token = req.cookies.token;
 
-  // Find the user by username in the users array
-  const user = users.find((user) => user.username === username);
+  jwt.verify(token, 'your-secret-key', (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ message: 'Invalid token' });
+    }
 
-  if (!user) {
-    return res.status(404).json({ message: 'User not found' });
-  }
+    const username = decoded.username;
 
-  res.json({ user: { firstName: user.firstName, lastName: user.lastName, email: user.email } });
+    // Find the user by username in the users array
+    const user = users.find((user) => user.username === username);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json({ user });
+  });
 });
-
-
-
-
 
 
 

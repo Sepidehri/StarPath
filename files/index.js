@@ -71,7 +71,10 @@ function redirectToContactUs(){
   window.location.href = '/contactus';
 }
 
-function redirectToAccount(){
-  window.location.href = '/account';
+function redirectToHoroscope(){
+  window.location.href = '/horoscope';
 }
 
+function redirectToAccount() {
+  window.location.href = '/account';
+}

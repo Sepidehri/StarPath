@@ -27,18 +27,8 @@
                     <input type="date" id="date-of-birth" class="input-date" required>
                 </div>
                 <div class="form-group">
-                    <label for="time-of-birth">Time of Birth:</label>
-                    <input type="time" id="time-of-birth" class="input-time" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="country">Country of Birth:</label>
-                    <input type="text" id="country" required>
-                </div>
-                <div class="form-group">
-                    <label for="city">City of Birth:</label>
-                    <input type="text" id="city" required>
+                    <label for="city">Place of Birth:</label>
+                    <input type="text" id="city" class="place-of-birth" required>
                 </div>
             </div>
             <div class="form-row">
@@ -61,20 +51,22 @@
                     <input type="password" id="password" required>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="confirm-password">Confirm Password:</label>
-                    <input type="password" id="confirm-password" required>
-                </div>
+            <div class="form-group confirm-password-group">
+              <label for="confirm-password">Confirm Password:</label>
+              <input type="password" id="confirm-password" required>
+          </div>
+          
+
+              </div>
+          </div>
             </div>
-            <div class="form-row">
-              <div class="form-row">
+            <div class="button-container">
                 <button type="submit" onclick="redirectToAccount()">Register</button>
-            </div>
-            
             </div>
         </form>
         <div id="registration-message"></div>
+         <div id="error-message" class="error"></div>
+
     </div>
           
     <script src="register.js"></script>
