@@ -11,9 +11,11 @@ const cookieParser = require('cookie-parser');
 
 
 
+
 app.use(express.static(path.join(__dirname, 'files')));
 app.use(bodyParser.json());
 app.use(cookieParser());
+
 
 
 app.get('/', (req, res) => {
@@ -65,6 +67,7 @@ app.get('/horoscope', (req, res) => {
   res.sendFile(__dirname + '/horoscope.html');
 });
 
+
 app.get('/astrology/:sign/today', async (req, res) => {
   const sign = req.params.sign;
   const day = 'today';
@@ -88,8 +91,33 @@ app.get('/astrology/:sign/today', async (req, res) => {
   }
 });
 
+
+app.get('/fetch-cities', async (req, res) => {
+  const options = {
+    method: 'GET',
+    url: 'https://wft-geo-db.p.rapidapi.com/v1/geo/adminDivisions',
+    headers: {
+      'X-RapidAPI-Key': '6c588273dbmsh5e380d6f76000dep1312dfjsnfd5b6c1e7f5b',
+      'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
+    }
+  };
+
+
+  try {
+    console.log(1)
+    const response = await axios.request(options);
+    console.log(2)
+    console.log(response.data);
+    console.log(13)
+  } catch (error) {
+    console.log(4)
+    console.error(error);
+  }});
+
+
 app.post('/register', async (req, res) => {
   const { username, password, name, email } = req.body;
+
 
   // Check if the username is already taken
   const existingUser = users.find((user) => user.username === username);
@@ -143,8 +171,9 @@ app.post('/login', async (req, res) => {
   });
 
   // Set the token in a cookie
-  res.cookie('token', token, { httpOnly: true }).json({ message: 'Login successful' });
+  res.cookie('token', token, { httpOnly: true ,sameSite: 'none', secure: true }).json({ message: 'Login successful' });
 });
+
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
@@ -186,7 +215,6 @@ app.get('/account', authenticateToken, (req, res) => {
     res.json({ user });
   });
 });
-
 
 
 
