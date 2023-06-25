@@ -7,7 +7,7 @@ const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
-
+const users = [];
 
 
 
@@ -115,106 +115,96 @@ app.get('/fetch-cities', async (req, res) => {
   }});
 
 
-app.post('/register', async (req, res) => {
-  const { username, password, name, email } = req.body;
-
-
-  // Check if the username is already taken
-  const existingUser = users.find((user) => user.username === username);
-  if (existingUser) {
-    return res.status(400).json({ message: 'Username already exists' });
-  }
-
-  // Hash the password
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  // Create a new user object
-  const user = {
-    id: users.length + 1,
-    username,
-    password: hashedPassword,
-    name,
-    email,
-  };
-
-  // Store the user in the users array (replace with database storage in production)
-  users.push(user);
-
-  // Generate a JWT token
-  const token = jwt.sign({ username: user.username }, 'b478b865481d0b890145b674ffb5d2d69dfc63316730f5023331b25d1149060ca64e176dd91cb67cb461b995c7b97cf6b5b8bfb3927c50427a60d725f856e07c', {
-    expiresIn: '1h', // Set the expiration time for the token
-  });
-
-  res.json({ token });
-});
-
-app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-
-  // Find the user by username
-  const user = users.find((user) => user.username === username);
-
-  if (!user) {
-    return res.status(401).json({ message: 'Invalid username or password' });
-  }
-
-  // Compare the provided password with the stored hashed password
-  const isPasswordValid = await bcrypt.compare(password, user.password);
-
-  if (!isPasswordValid) {
-    return res.status(401).json({ message: 'Invalid username or password' });
-  }
-
-  // Generate a JWT token
-  const token = jwt.sign({ username: user.username }, 'b478b865481d0b890145b674ffb5d2d69dfc63316730f5023331b25d1149060ca64e176dd91cb67cb461b995c7b97cf6b5b8bfb3927c50427a60d725f856e07c', {
-    expiresIn: '1h', // Set the expiration time for the token
-  });
-
-  // Set the token in a cookie
-  res.cookie('token', token, { httpOnly: true ,sameSite: 'none', secure: true }).json({ message: 'Login successful' });
-});
-
-
-function authenticateToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-
-  if (!token) {
-    return res.sendStatus(401); // No token provided
-  }
-
-  jwt.verify(token, 'b478b865481d0b890145b674ffb5d2d69dfc63316730f5023331b25d1149060ca64e176dd91cb67cb461b995c7b97cf6b5b8bfb3927c50427a60d725f856e07c', (err, user) => {
-    if (err) {
-      return res.sendStatus(403); // Invalid token
-    }
-
-    req.user = user; // Attach the decoded user information to the request object
-    next();
-  });
-}
-
-
-app.get('/account', authenticateToken, (req, res) => {
-  // Retrieve the token from the cookie
-  const token = req.cookies.token;
-
-  jwt.verify(token, 'your-secret-key', (err, decoded) => {
-    if (err) {
-      return res.status(403).json({ message: 'Invalid token' });
-    }
-
-    const username = decoded.username;
-
-    // Find the user by username in the users array
-    const user = users.find((user) => user.username === username);
-
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
+ 
+  app.get('/account', authenticateToken, (req, res) => {
+    const user = req.user;
     res.json({ user });
   });
-});
+  
+  app.post('/register', async (req, res) => {
+    const { username, password, firstName, lastName, email } = req.body;
+  
+    // Check if the username is already taken
+    const existingUser = users.find((user) => user.username === username);
+    if (existingUser) {
+      return res.status(400).json({ message: 'Username already exists' });
+    }
+  
+    try {
+      // Hash the password
+      const hashedPassword = await bcrypt.hash(password, 10);
+  
+      // Create a new user object
+      const user = {
+        id: users.length + 1,
+        username,
+        password: hashedPassword,
+        firstName,
+        lastName,
+        email,
+      };
+  
+      // Store the user in the users array
+      users.push(user);
+  
+      // Generate a JWT token
+      const token = jwt.sign({ username: user.username }, 'b478b865481d0b890145b674ffb5d2d69dfc63316730f5023331b25d1149060ca64e176dd91cb67cb461b995c7b97cf6b5b8bfb3927c50427a60d725f856e07c', {
+        expiresIn: '1h', // Set the expiration time for the token
+      });
+  
+      // Set the token in a cookie
+      res.cookie('token', token, { httpOnly: true, sameSite: 'none', secure: true }).json({ message: 'Registration successful!' });
+    } catch (error) {
+      console.error('Error during registration:', error);
+      res.status(500).json({ message: 'Internal Server Error' });
+    }
+  });
+  
+  app.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+  
+    // Find the user by username
+    const user = users.find((user) => user.username === username);
+  
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid username or password' });
+    }
+  
+    // Compare the provided password with the stored hashed password for the user
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+  
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: 'Invalid username or password' });
+    }
+  
+    // Generate a JWT token
+    const token = jwt.sign({ username: user.username }, 'b478b865481d0b890145b674ffb5d2d69dfc63316730f5023331b25d1149060ca64e176dd91cb67cb461b995c7b97cf6b5b8bfb3927c50427a60d725f856e07c', {
+      expiresIn: '1h', // Set the expiration time for the token
+    });
+  
+    // Set the token in a cookie
+    res.cookie('token', token, { httpOnly: true, sameSite: 'none', secure: true }).json({ message: 'Login successful' });
+  });
+  
+  
+  
+  function authenticateToken(req, res, next) {
+    const token = req.cookies.token;
+  
+    if (!token) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+  
+    jwt.verify(token, 'b478b865481d0b890145b674ffb5d2d69dfc63316730f5023331b25d1149060ca64e176dd91cb67cb461b995c7b97cf6b5b8bfb3927c50427a60d725f856e07c', (err, decoded) => {
+      if (err) {
+        return res.status(403).json({ message: 'Invalid token' });
+      }
+  
+      req.user = decoded; // Attach the decoded user information to the request object
+      next();
+    });
+  }
+  
 
 
 

@@ -1,6 +1,3 @@
-
-
-
 document.getElementById('signin-form').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent form submission
   
@@ -30,7 +27,4 @@ document.getElementById('signin-form').addEventListener('submit', async function
       document.getElementById('error-message').innerText = 'Invalid username or password.';
     }
   });
-  
-  
-    
   

@@ -1,19 +1,34 @@
-// Retrieve the sign from the query parameter
-const urlParams = new URLSearchParams(window.location.search);
-const sign = urlParams.get('sign');
-
-// Display the sign in the page
-const signElement = document.getElementById('sign');
-signElement.textContent = sign;
-
-// Fetch the horoscope data for the selected sign
-fetch(`/astrology/${sign}/today`)
-  .then(response => response.json())
-  .then(data => {
-    // Display the horoscope data in the page
-    const horoscopeElement = document.getElementById('horoscope');
-    horoscopeElement.textContent = data.horoscope;
-  })
-  .catch(error => {
+async function fetchHoroscope(sign) {
+  console.log(1)
+  try {
+    const response = await fetch(`/astrology/${sign}/today`);
+    console.log(2)
+    if (response.ok) {
+      console.log(3)
+      const data = await response.json();
+      console.log(4)
+      console.log(data);
+      console.log(5)
+      displayHoroscopeData(data);
+      console.log(6)
+    } else {
+      throw new Error('Failed to fetch horoscope');
+      console.log(7)
+    }
+  } catch (error) {
     console.error(error);
-  });
+  }
+}
+
+// Call the fetchHoroscope function with the sign parameter
+const urlParams = new URLSearchParams(window.location.search);
+console.log(8)
+const sign = urlParams.get('/horoscope/:sign');
+console.log(9)
+if (sign) {
+  console.log(10)
+  fetchHoroscope(sign);
+  console.log(11)
+} else {
+  console.error('Sign parameter is missing');
+}

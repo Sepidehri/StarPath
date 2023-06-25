@@ -1,44 +1,34 @@
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', async (event) => {
+    console.log(9)
     const citySelect = document.getElementById('birth-place');
+    console.log(10)
   
-    const fetchCities = () => {
-      const options = {
-        method: 'GET',
-        url: 'https://wft-geo-db.p.rapidapi.com/v1/geo/adminDivisions',
-        headers: {
-          'X-RapidAPI-Key': '6c588273dbmsh5e380d6f76000dep1312dfjsnfd5b6c1e7f5b',
-          'X-RapidAPI-Host': 'wft-geo-db.p.rapidapi.com'
-        }
-      };
-  
-      fetch(options.url, {
-        method: options.method,
-        headers: options.headers
-      })
-        .then(response => response.json())
-        
-        .then(data => {
-            console.log(2)
-          const cities = data.data;
-          console.log(3)
-          cities.forEach(city => {
-            console.log(4)
-            const option = document.createElement('option');
-            console.log(5)
-            option.value = city.cityName;
-            console.log(6)
-            option.textContent = city.cityName;
-            console.log(7)
-            citySelect.appendChild(option);
-          });
-        })
-        .catch(error => {
-          console.error('Error fetching city data:', error);
+    try {
+        console.log(11)
+      const response = await fetch('/fetch-cities');
+      console.log(response)
+      if (response.ok) {
+        const data = await response.json();
+        console.log(1)
+        const cities = data.cities;
+        console.log(2)
+        cities.forEach(city => {
+            console.log(3)
+          const option = document.createElement('option');
+          console.log(4)
+          option.value = city;
+          console.log(5)
+          option.textContent = city;
+          console.log(6)
+          citySelect.appendChild(option);
+          console.log(7)
         });
-    };
-  
-    // Fetch cities on page load
-    fetchCities();
+      } else {
+        throw new Error('Failed to fetch city data');
+      }
+    } catch (error) {
+      console.error('Error fetching city data:', error);
+    }
   
     // Handle form submission
     document.getElementById('chart-form').addEventListener('submit', function(event) {
@@ -65,7 +55,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         .then(data => {
           // Display the birth chart on the page
           const birthChart = document.getElementById('birth-chart');
-          birthChart.innerHTML = JSON.stringify(data); // Replace with your own logic to render the chart
+          birthChart.innerHTML = JSON.stringify(data); 
         })
         .catch(error => {
           console.error(error);
