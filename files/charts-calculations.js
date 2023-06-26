@@ -1,27 +1,16 @@
 document.addEventListener('DOMContentLoaded', async (event) => {
-    console.log(9)
     const citySelect = document.getElementById('birth-place');
-    console.log(10)
   
     try {
-        console.log(11)
       const response = await fetch('/fetch-cities');
-      console.log(response)
       if (response.ok) {
         const data = await response.json();
-        console.log(1)
         const cities = data.cities;
-        console.log(2)
         cities.forEach(city => {
-            console.log(3)
           const option = document.createElement('option');
-          console.log(4)
           option.value = city;
-          console.log(5)
           option.textContent = city;
-          console.log(6)
           citySelect.appendChild(option);
-          console.log(7)
         });
       } else {
         throw new Error('Failed to fetch city data');
