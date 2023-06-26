@@ -3,72 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="register.css">
+    <script src="register.js"></script>
     <title>Registration</title>
 </head>
 <body>
-    <div class="container">
-        <h1>Create an Account</h1>
-        <form id="registration-form">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="first-name">First Name:</label>
-                    <input type="text" id="first-name" required>
-                </div>
-                <div class="form-group">
-                    <label for="last-name">Last Name:</label>
-                    <input type="text" id="last-name" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="date-of-birth">Date of Birth:</label>
-                    <input type="date" id="date-of-birth" class="input-date" required>
-                </div>
-                <div class="form-group">
-                    <label for="city">Place of Birth:</label>
-                    <input type="text" id="city" class="place-of-birth" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="phone-number">Phone Number:</label>
-                    <input type="tel" id="phone-number">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address:</label>
-                    <input type="email" id="email" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="username">Username:</label>
-                    <input type="text" id="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" required>
-                </div>
-            </div>
-            <div class="form-group confirm-password-group">
-              <label for="confirm-password">Confirm Password:</label>
-              <input type="password" id="confirm-password" required>
-          </div>
-          
+  <body>
+    <div class="box">
 
-              </div>
-          </div>
+        
+        <div class="page">
+            <div class="header">
+                <a id="login" class="active" href="#login">login</a>
+                <a id="signup" href="#signup">signup</a>
             </div>
-            <div class="button-container">
-                <button type="submit">Register</button>
+            <div id="errorMsg"></div>
+            <div class="content">
+                <form class="login" name="loginForm" onsubmit="return validateLoginForm()" method="POST">
+                    <input type="text" name="name" id="logName" placeholder="Username">
+                    <input type="password" name="password" id="logPassword" placeholder="Password">
+                    <div id="check">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <br><br>
+                    <input type="submit" value="Login">
+                    <a href="#">Forgot Password?</a>
+                </form>
+                <form class="signup" name="signupForm" onsubmit="return validateSignupForm()" method="POST">
+                    <input type="email" name="email" id="signEmail" placeholder="Email">
+                    <input type="text" name="name" id="signName" placeholder="Username">
+                    <input type="password" name="password" id="signPassword" placeholder="Password"><br>
+                    <input type="submit" value="SignUp">
+                </form>
             </div>
-        </form>
-        <div id="registration-message"></div>
-         <div id="error-message" class="error"></div>
-
+        </div>
     </div>
+
+</body>
           
-    <script src="register.js"></script>
+    
 </body>
 </html>
