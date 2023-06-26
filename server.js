@@ -106,6 +106,8 @@ app.get('/fetch-cities', async (req, res) => {
   try {
     console.log(1)
     const response = await axios.request(options);
+    const cities = response.data.data.map((item) => item.name); // Extract the name of each city from the API response
+    res.json({ cities });
     console.log(2)
     console.log(response.data);
     console.log(13)
