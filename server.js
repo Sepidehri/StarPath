@@ -115,8 +115,59 @@ app.get('/fetch-cities', async (req, res) => {
   }});
 
 
+// Secret key for JWT
+const secretKey = 'b478b865481d0b890145b674ffb5d2d69dfc63316730f5023331b25d1149060ca64e176dd91cb67cb461b995c7b97cf6b5b8bfb3927c50427a60d725f856e07c';
 
+// Login route
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
 
+  // Find the user by username
+  const user = users.find((user) => user.username === username);
+
+  if (!user) {
+    return res.status(401).json({ message: 'Invalid username or password' });
+  }
+
+  // Compare the provided password with the stored hashed password for the user
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+
+  if (!isPasswordValid) {
+    return res.status(401).json({ message: 'Invalid username or password' });
+  }
+
+  // Generate a JWT token
+  const token = jwt.sign({ username: user.username }, secretKey, {
+    expiresIn: '1h', // Set the expiration time for the token
+  });
+
+  // Set the token in a cookie
+  res.cookie('token', token, { httpOnly: true, sameSite: 'none', secure: true }).json({ message: 'Login successful' });
+});
+
+// Middleware to authenticate token
+function authenticateToken(req, res, next) {
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(401).json({ message: 'Unauthorized' });
+  }
+
+  jwt.verify(token, secretKey, (err, decoded) => {
+    if (err) {
+      return res.status(403).json({ message: 'Invalid token' });
+    }
+
+    req.user = decoded; // Attach the decoded user information to the request object
+    next();
+  });
+}
+
+// Account route with authentication
+app.get('/account', authenticateToken, (req, res) => {
+  const user = req.user;
+  res.json({ user });
+});
 
 
 app.listen(3000, () => {
