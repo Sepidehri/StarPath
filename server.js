@@ -80,24 +80,21 @@ app.get('/astrology/:sign/today', async (req, res) => {
   const sign = req.params.sign;
   const day = 'today';
 
-  const options = {
-    method: 'GET',
-    url: `https://sameer-kumar-aztro-v1.p.rapidapi.com/?sign=${sign}&day=${day}`,
-    headers: {
-      'X-RapidAPI-Key': '6c588273dbmsh5e380d6f76000dep1312dfjsnfd5b6c1e7f5b',
-      'X-RapidAPI-Host': 'sameer-kumar-aztro-v1.p.rapidapi.com',
-    },
-  };
-
-  try {
-    const response = await axios.request(options);
-    console.log(response.data);
-    res.json(response.data);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Server Error');
+const options = {
+  method: 'GET',
+  url: 'https://horoscopes-ai.p.rapidapi.com/get_horoscope_en/%7Bsign%7D/%7Bperiod%7D/general',
+  headers: {
+    'X-RapidAPI-Key': '6c588273dbmsh5e380d6f76000dep1312dfjsnfd5b6c1e7f5b',
+    'X-RapidAPI-Host': 'horoscopes-ai.p.rapidapi.com'
   }
-});
+};
+
+try {
+	const response = await axios.request(options);
+	console.log(response.data);
+} catch (error) {
+	console.error(error);
+}});
 
 
 app.get('/fetch-cities', async (req, res) => {
