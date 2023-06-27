@@ -1,3 +1,5 @@
+require('dotenv').config()
+//require(models);
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -7,14 +9,20 @@ const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
-const users = [];
-
-
+const db = require("./models");
+const User = db.user;
+var session = require('express-session')
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}))
 
 
 app.use(express.static(path.join(__dirname, 'files')));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(express.json())
 
 
 
@@ -104,73 +112,79 @@ app.get('/fetch-cities', async (req, res) => {
 
 
   try {
-    console.log(1)
     const response = await axios.request(options);
-    const cities = response.data.data.map((item) => item.name); // Extract the name of each city from the API response
+    const cities = response.data.data.map((item) => item.name); 
     res.json({ cities });
-    console.log(2)
     console.log(response.data);
-    console.log(13)
   } catch (error) {
-    console.log(4)
     console.error(error);
   }});
 
-
-// Secret key for JWT
-const secretKey = 'b478b865481d0b890145b674ffb5d2d69dfc63316730f5023331b25d1149060ca64e176dd91cb67cb461b995c7b97cf6b5b8bfb3927c50427a60d725f856e07c';
-
-// Login route
-app.post('/login', async (req, res) => {
-  const { username, password } = req.body;
-
-  // Find the user by username
-  const user = users.find((user) => user.username === username);
-
-  if (!user) {
-    return res.status(401).json({ message: 'Invalid username or password' });
-  }
-
-  // Compare the provided password with the stored hashed password for the user
-  const isPasswordValid = await bcrypt.compare(password, user.password);
-
-  if (!isPasswordValid) {
-    return res.status(401).json({ message: 'Invalid username or password' });
-  }
-
-  // Generate a JWT token
-  const token = jwt.sign({ username: user.username }, secretKey, {
-    expiresIn: '1h', // Set the expiration time for the token
-  });
-
-  // Set the token in a cookie
-  res.cookie('token', token, { httpOnly: true, sameSite: 'none', secure: true }).json({ message: 'Login successful' });
-});
-
-// Middleware to authenticate token
-function authenticateToken(req, res, next) {
-  const token = req.cookies.token;
-
-  if (!token) {
-    return res.status(401).json({ message: 'Unauthorized' });
-  }
-
-  jwt.verify(token, secretKey, (err, decoded) => {
-    if (err) {
-      return res.status(403).json({ message: 'Invalid token' });
+  
+  app.post('/signup', async (req, res) => {
+    try {
+      const user = await User.create({
+        username: req.body.username,
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, 8),
+      });
+  
+     res.send({ message: "User registered successfully!" });
+     
+    } catch (error) {
+      res.status(500).send({ message: error.message });
     }
-
-    req.user = decoded; // Attach the decoded user information to the request object
-    next();
   });
-}
+  
+  app.post('/login', async (req, res) => {
+    try {
+      const user = await User.findOne({
+        where: {
+          username: req.body.username,
+        },
+      });
+  
+      if (!user) {
+        return res.status(404).send({ message: "User Not found." });
+      }
+  
+      const passwordIsValid = bcrypt.compareSync(
+        req.body.password,
+        user.password
+      );
+  
+      if (!passwordIsValid) {
+        return res.status(401).send({
+          message: "Invalid Password!",
+        });
+      }
+      req.session.username=req.body.username;
+      return res.status(200).send();
+    } catch (error) {
+      return res.status(500).send({ message: error.message });
+    }
+  });
 
-// Account route with authentication
-app.get('/account', authenticateToken, (req, res) => {
-  const user = req.user;
-  res.json({ user });
-});
+  app.get('/account-detail', async (req, res) => {
+    try {
+      console.log(req.session)
+      var usename = req.session.username ;
+      const user = await User.findOne({
+        where: {
+          username: usename,
+        },
+      });
+  
+      if (!user) {
+        return res.status(401).send({ message: "Unauthorized" });
+      }
 
+  
+      return res.status(200).send({username:user.username, email:user.email});
+    } catch (error) {
+      return res.status(500).send({ message: error.message });
+    }
+  });
 
 app.listen(3000, () => {
   console.log('Server listening on port 3000');

@@ -20,15 +20,16 @@ async function fetchHoroscope(sign) {
   }
 }
 
+
 // Call the fetchHoroscope function with the sign parameter
 const urlParams = new URLSearchParams(window.location.search);
-console.log(8)
-const sign = urlParams.get('/horoscope/:sign');
-console.log(9)
+console.log(urlParams);
+const sign = urlParams.get('sign'); // Updated to get the 'sign' parameter
+console.log(sign);
 if (sign) {
-  console.log(10)
+  console.log(10);
   fetchHoroscope(sign);
-  console.log(11)
+  console.log(11);
 } else {
   console.error('Sign parameter is missing');
 }

@@ -24,7 +24,7 @@
             </div>
             <div id="errorMsg"></div>
             <div class="content">
-                <form class="login" name="loginForm" onsubmit="return validateLoginForm()" method="POST">
+                <div class="form login" name="loginForm" >
                     <input type="text" name="name" id="logName" placeholder="Username">
                     <input type="password" name="password" id="logPassword" placeholder="Password">
                     <div id="check">
@@ -32,15 +32,14 @@
                         <label for="remember">Remember me</label>
                     </div>
                     <br><br>
-                    <input type="submit" value="Login">
-                    <a href="#">Forgot Password?</a>
-                </form>
-                <form class="signup" name="signupForm" onsubmit="return validateSignupForm()" method="POST">
+                    <input type="button" id="loginBtn" value="Login">
+                  </div>
+                <div class="form signup" name="signupForm" >
                     <input type="email" name="email" id="signEmail" placeholder="Email">
                     <input type="text" name="name" id="signName" placeholder="Username">
                     <input type="password" name="password" id="signPassword" placeholder="Password"><br>
-                    <input type="submit" value="SignUp">
-                </form>
+                    <input type="button" value="SignUp" id="signupBtn">
+                </div>
             </div>
         </div>
     </div>

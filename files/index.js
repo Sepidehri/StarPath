@@ -17,25 +17,6 @@ $(function() {
 });
 
 
-
-
-document.addEventListener('DOMContentLoaded', (event) => {
-  document.querySelectorAll('.zodiac-sign').forEach(button => {
-    button.addEventListener('click', function() {
-      const sign = this.getAttribute('data-sign');
-      
-      fetch(`/astrology/${sign}/today`)
-        .then(response => response.json())
-        .then(data => {
-          window.location.href = '/horoscope.html?data=' + encodeURIComponent(JSON.stringify(data));
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    });
-  });
-});
-
 function togglePhoneNumber() {
   var phoneNumberElement = document.getElementById("phone-number");
   phoneNumberElement.classList.toggle("hidden");

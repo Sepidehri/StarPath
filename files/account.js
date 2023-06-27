@@ -1,5 +1,5 @@
 // Fetch user information from the server
-fetch('/account', {
+fetch('/account-detail', {
     method: 'GET',
     credentials: 'include', // Include cookies in the request
   })
@@ -16,9 +16,8 @@ fetch('/account', {
     })
     .then((data) => {
       // Update the account information in the DOM
-      const user = data.user; // Extract the user object from the response
-      document.getElementById('first-name').innerText = user.firstName;
-      document.getElementById('last-name').innerText = user.lastName;
+      const user = data; // Extract the user object from the response
+      document.getElementById('user-name').innerText = user.username;
       document.getElementById('email').innerText = user.email;
     })
     .catch((error) => {

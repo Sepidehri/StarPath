@@ -68,7 +68,7 @@ body{
     overflow: hidden;
 }
 
-form {
+.form {
     position: relative;
     display: inline-flex;
     width: 100%;
@@ -87,7 +87,7 @@ form {
 
 }
 
-.extend form {
+.extend .form {
 	right: 100%;
 }
 

@@ -11,30 +11,38 @@ $(window).on("hashchange", function () {
 });
 $(window).trigger("hashchange");
 
-function validateLoginForm() {
-	var name = document.getElementById("logName").value;
+$(document).on('click','#loginBtn',function(){
+	var username = document.getElementById("logName").value;
 	var password = document.getElementById("logPassword").value;
 
-	if (name == "" || password == "") {
+	if (username == "" || password == "") {
 		document.getElementById("errorMsg").innerHTML = "Please fill the required fields"
 		return false;
 	}
 
-	else if (password.length < 8) {
-		document.getElementById("errorMsg").innerHTML = "Your password must include atleast 8 characters"
-		return false;
-	}
-	else {
-		alert("Successfully logged in");
-		return true;
-	}
-}
-function validateSignupForm() {
-	var mail = document.getElementById("signEmail").value;
-	var name = document.getElementById("signName").value;
+    $.ajax({
+        url: "/login",
+        method: "POST",
+        data: JSON.stringify({ username, password }),
+        contentType: "application/json",
+        success: function (response) {
+          alert("Successfully logged in");
+          window.location.href = "/account";
+        },
+        error: function (xhr, status, error) {
+          document.getElementById("errorMsg").innerHTML = "Invalid username or password.";
+        }
+      });
+    
+      return false; // Prevent form submission
+    });
+	
+    $(document).on('click','#signupBtn',function(){
+	var email = document.getElementById("signEmail").value;
+	var username = document.getElementById("signName").value;
 	var password = document.getElementById("signPassword").value;
 
-	if (mail == "" || name == "" || password == "") {
+	if (username == "" || email == "" || password == "") {
 		document.getElementById("errorMsg").innerHTML = "Please fill the required fields"
 		return false;
 	}
@@ -44,7 +52,22 @@ function validateSignupForm() {
 		return false;
 	}
 	else {
-		alert("Successfully signed up");
-		return true;
+        
+        $.ajax({
+            url: '/signup',
+            method: 'POST',
+            data: JSON.stringify({ username, password, email }),
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response)
+              alert('Successfully registered');
+        // window.location.href = '/login';
+            },
+            error: function (xhr, status, error) {
+              document.getElementById('errorMsg').innerHTML = 'Registration failed. Please try again.';
+            }
+          });
+        
+        
 	}
-}
+});
