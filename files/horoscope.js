@@ -41,12 +41,7 @@ function displayHoroscopeData(data) {
   // Update the UI with the horoscope data
   const horoscopeText = document.getElementById('horoscope-text');
   horoscopeText.textContent = data.message;
-  
-  const signElement = document.getElementById('sign');
-  signElement.textContent = `Sign: ${data.sign}`;
-  
-  const horoscopeElement = document.getElementById('horoscope');
-  horoscopeElement.textContent = `Horoscope: ${data.horoscope}`;
+
 }
 
 
