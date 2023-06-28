@@ -1,5 +1,4 @@
 require('dotenv').config()
-//require(models);
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -195,6 +194,20 @@ app.get('/fetch-cities', async (req, res) => {
       return res.status(500).send({ message: error.message });
     }
   });
+
+  app.delete('/users/:id', (req, res) => {
+    const userId = req.params.id;
+  
+    const deletedUser = users.find(user => user.id === userId);
+    if (!deletedUser) {
+      return res.status(404).send('User not found');
+    }
+    const index = users.indexOf(deletedUser);
+    users.splice(index, 1);
+  
+    res.send('User deleted successfully');
+  });
+  
 
 app.listen(3000, () => {
   console.log('Server listening on port 3000');
