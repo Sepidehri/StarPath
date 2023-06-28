@@ -8,13 +8,16 @@ $(function() {
     .then(response => response.json())
     .then(data => {
       // Redirect to a new page and pass the horoscope data
-      window.location.href = '/horoscope.html?data=' + encodeURIComponent(JSON.stringify(data));
+      window.location.href = `/horoscope.html?sign=${sign}&data=${encodeURIComponent(JSON.stringify(data))}`;
     })
     .catch(error => {
       console.error(error);
     });
   });
 });
+
+
+
 
 
 function togglePhoneNumber() {
@@ -54,6 +57,9 @@ function redirectToContactUs(){
 
 function redirectToHoroscope(){
   window.location.href = '/horoscope';
+}
+function redirectToHoroscope(sign){
+  window.location.href = '/horoscope?sign='+sign;
 }
 
 function redirectToAccount() {

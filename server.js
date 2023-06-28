@@ -80,21 +80,33 @@ app.get('/astrology/:sign/today', async (req, res) => {
   const sign = req.params.sign;
   const day = 'today';
 
-const options = {
-  method: 'GET',
-  url: 'https://horoscopes-ai.p.rapidapi.com/get_horoscope_en/%7Bsign%7D/%7Bperiod%7D/general',
-  headers: {
-    'X-RapidAPI-Key': '6c588273dbmsh5e380d6f76000dep1312dfjsnfd5b6c1e7f5b',
-    'X-RapidAPI-Host': 'horoscopes-ai.p.rapidapi.com'
+  const encodedParams = new URLSearchParams();
+  encodedParams.set('sign', sign);
+  encodedParams.set('date', '2023-06-21');
+  encodedParams.set('api_key', '6c588273dbmsh5e380d6f76000dep1312dfjsnfd5b6c1e7f5b');
+  encodedParams.set('timezone', '5.5');
+  
+  const options = {
+    method: 'POST',
+    url: 'https://daily-horoscope3.p.rapidapi.com/api/1.0/get_daily_horoscope.php',
+    headers: {
+      'content-type': 'application/x-www-form-urlencoded',
+      'X-RapidAPI-Key': '6c588273dbmsh5e380d6f76000dep1312dfjsnfd5b6c1e7f5b',
+      'X-RapidAPI-Host': 'daily-horoscope3.p.rapidapi.com'
+    },
+    data: encodedParams,
+  };
+  
+  try {
+    const response = await axios.request(options);
+    console.log(response.data);
+    res.json(response.data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server Error');
   }
-};
+});
 
-try {
-	const response = await axios.request(options);
-	console.log(response.data);
-} catch (error) {
-	console.error(error);
-}});
 
 
 app.get('/fetch-cities', async (req, res) => {
