@@ -83,7 +83,7 @@ app.get('/astrology/:sign/today', async (req, res) => {
   const encodedParams = new URLSearchParams();
   encodedParams.set('sign', sign);
   var currentDate = new Date().toISOString().split('T')[0];
-  encodedParams.set('date', currentDate);
+  encodedParams.set('date', '2023-06-21');
   encodedParams.set('api_key', '6c588273dbmsh5e380d6f76000dep1312dfjsnfd5b6c1e7f5b');
   encodedParams.set('timezone', '5.5');
   
