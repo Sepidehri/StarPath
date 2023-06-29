@@ -174,6 +174,19 @@ app.get('/fetch-cities', async (req, res) => {
     }
   });
 
+  app.post('/logout', (req, res) => {
+    // Clear the session data
+    req.session.destroy((err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).send('Server Error');
+      }
+      
+      return res.status(200).send('Logout successful');
+    });
+  });
+  
+
   app.get('/account-detail', async (req, res) => {
     try {
       console.log(req.session)
@@ -208,6 +221,28 @@ app.get('/fetch-cities', async (req, res) => {
     res.send('User deleted successfully');
   });
   
+  let users = [
+    { id: 1, name: 'John Doe', email: 'john@example.com' },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
+  ];
+  
+  // PUT route to update a user
+  app.put('/users/:id', (req, res) => {
+    const userId = parseInt(req.params.id);
+    const { name, email } = req.body;
+  
+    // Find the user with the specified ID
+    const userToUpdate = users.find(user => user.id === userId);
+    if (!userToUpdate) {
+      return res.status(404).send('User not found');
+    }
+  
+    // Update the user properties
+    userToUpdate.name = name || userToUpdate.name;
+    userToUpdate.email = email || userToUpdate.email;
+  
+    res.send('User updated successfully');
+  });
 
 app.listen(3000, () => {
   console.log('Server listening on port 3000');
