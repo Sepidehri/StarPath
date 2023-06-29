@@ -3,13 +3,9 @@ async function fetchHoroscope(sign) {
   try {
     const response = await fetch(`/astrology/${sign}/today`);
     if (response.ok) {
-      console.log(3);
       const data = await response.json();
-      console.log(4);
       console.log(data);
-      console.log(5);
       displayHoroscopeData(data);
-      console.log(6);
     } else {
       throw new Error('Failed to fetch horoscope');
       console.log(7);

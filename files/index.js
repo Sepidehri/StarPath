@@ -3,7 +3,6 @@ $(function() {
     // Get the sign from the clicked button
     const sign = $(this).data('sign');
   
-    // Make a request to your server's astrology endpoint
     fetch(`/astrology/${sign}/today`)
     .then(response => response.json())
     .then(data => {

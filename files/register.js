@@ -71,3 +71,19 @@ $(document).on('click','#loginBtn',function(){
         
 	}
 });
+
+$(document).on('click', '#logoutBtn', function() {
+  $.ajax({
+    url: '/logout',
+    method: 'POST',
+    success: function(response) {
+      alert('Successfully logged out');
+      window.location.href = '/';
+    },
+    error: function(xhr, status, error) {
+      console.error(error);
+    }
+  });
+
+  return false; // Prevent form submission
+});
